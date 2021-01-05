@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="projectForm" (ngSubmit)="onCreateProject()">
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input
+            type="text"
+            id="projectName"
+            formControlName="projectName"
+            class="form-control">
+            <span
+              *ngIf="!projectForm.get('projectName').valid && projectForm.get('projectName').touched"
+              class="help-block">
+              <span
+                *ngIf="projectForm.get('projectName').errors['invalidProjectName']">
+                Project name is not allowed!
+              </span>
+              <span
+                *ngIf="projectForm.get('projectName').errors['required']">
+                This field is required!
+              </span>
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="email">email</label>
+          <input
+            type="text"
+            id="email"
+            formControlName="email"
+            class="form-control">
+            <span
+              *ngIf="!projectForm.get('email').valid && projectForm.get('email').touched"
+              class="help-block">
+              <span
+                *ngIf="projectForm.get('email').errors['invalidEmail']">
+                Email is not allowed!
+              </span>
+              <span
+                *ngIf="projectForm.get('email').errors['required']">
+                Email is required!
+              </span>
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="projectStatus">Project Status</label>
+          <select
+            id="status"
+            formControlName="status"
+            class="form-control"
+            >
+            <option value="stable">Stable</option>
+            <option value="critical">Critical</option>
+            <option value="finished">Finished</option>
+          </select>
+        </div>
+        <span
+          *ngIf="!projectForm.valid && projectForm.touched"
+          class="help-block">
+          Please enter a valid data!
+        </span>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!projectForm.valid">Create Project (with validations)</button>
+          <button
+          class="btn btn-primary"
+          type="submit">Create Project (without validations)</button>
+      </form>
+    </div>
+  </div>
+</div>

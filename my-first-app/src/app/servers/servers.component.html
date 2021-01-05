@@ -1,0 +1,81 @@
+<!--
+  Property (of element) binding []. Now disabled property of button is dynamic
+  Rule of thumb: to just print something in template: use string interpolation
+  to change the (html) element property dynamically: use property binding
+  click, input are normal events provided by DOM (Document Object Model)
+  {{}} -> string interpolation
+  [] -> property binding
+  () -> event binding
+  [(ngModel)] -> two way data binding: from template to type script and vice versa
+  $event -> gives access to event data
+-->
+<label>Server Name</label>
+<!--
+  In this case we are passing data from template (html) to TypeScript. event binding
+<input
+type="text"
+class="form-control"
+(input)="onUpdateServer($event)">
+-->
+<!-- But in this case, we are passing data from template (html) to TypeScript and vice versa. 2 way binding -->
+<input type="text" class="form-control" [(ngModel)]="serverName" />
+<p>{{ serverName }}</p>
+<button
+  class="btn btn-primary"
+  [disabled]="!allowNewServer"
+  (click)="onCreateServer()"
+>
+  Add Server
+</button>
+<!-- <p [innerText]="allowNewServer"></p> -->
+<!-- <p>{{ serverCreationStatus }}</p> -->
+
+<!-- just ngIf. Here * represent a structural directive that adds or removes element from DOM -->
+<!-- <p *ngIf="serverCreated">{{ serverName }} server was created</p> -->
+
+<p *ngIf="serverCreated; else noServer">{{ serverName }} server was created</p>
+<ng-template #noServer>
+  <p>No server was created</p>
+</ng-template>
+
+<!-- Assignment -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <label>Server User</label>
+      <input type="text" class="form-control" [(ngModel)]="serverUser" />
+      <p>{{ serverUser }}</p>
+      <button
+        class="btn btn-primary"
+        [disabled]="serverUser === ''"
+        (click)="serverUser = ''"
+      >
+        Reset Server User
+      </button>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- <button class="btn btn-primary" (click)="showSecret = !showSecret">Display Details</button> -->
+      <button class="btn btn-primary" (click)="onToggleDetails()">
+        Display Details
+      </button>
+      <p *ngIf="showSecret">Secret Password = tuna</p>
+      <div
+        *ngFor="let logItem of log; let i = index"
+        [ngStyle]="{ backgroundColor: i >= 4 ? 'blue' : 'transparent' }"
+        [ngClass]="{ 'white-text': i >= 4 }"
+      >
+        {{ logItem }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-server *ngFor="let server of servers"></app-server>
+<!-- <app-server></app-server> -->

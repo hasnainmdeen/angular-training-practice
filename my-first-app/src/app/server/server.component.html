@@ -1,0 +1,9 @@
+<!--
+  In String interpolation {{}}, string should be returned in the end. Or anything that can be easily
+  converted into a string
+  ngStyle -> changes the style dynamically. it is an attribute directive, we pass a javascript object to it
+-->
+<p
+[ngStyle]="{backgroundColor: getColor()}"
+[ngClass]="{online: serverStatus === 'online'}">
+{{ 'Server' }} with ID {{ serverId }} is {{ getServerStatus() }}</p>

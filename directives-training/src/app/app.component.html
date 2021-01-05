@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onlyOdd = !onlyOdd">Only Show Odd Numbers</button>
+      <br/>
+      <hr/>
+      <ul class="list-group">
+        <div *ngIf="onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{odd: odd % 2 !== 0}"
+            [ngStyle]="{backgroundColor: odd % 2 !== 0 ? 'yellow' : 'transparent'}"
+            *ngFor="let odd of oddNumbers">
+            {{odd}}
+          </li>
+        </div>
+        <!-- <div *ngIf="!onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{}"
+            [ngStyle]="{backgroundColor: even % 2 !== 0 ? 'yellow' : 'transparent'}"
+            *ngFor="let even of evenNumbers">
+            {{even}}
+          </li>
+        </div> -->
+        <!-- below is what a star transforms to in structural directive. Behind the scenes thing -->
+        <!-- <ng-template [ngIf]="!onlyOdd">
+          <div>
+            <li
+              class="list-group-item"
+              [ngClass]="{}"
+              [ngStyle]="{backgroundColor: even % 2 !== 0 ? 'yellow' : 'transparent'}"
+              *ngFor="let even of evenNumbers">
+              {{even}}
+            </li>
+          </div>
+        </ng-template> -->
+        <div *appUnless="onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{}"
+            [ngStyle]="{backgroundColor: even % 2 !== 0 ? 'yellow' : 'transparent'}"
+            *ngFor="let even of evenNumbers">
+            {{even}}
+          </li>
+        </div>
+      </ul>
+      <!-- no need for square bracket -->
+      <p appBasicHighlight>Style me with basic directive!</p>
+      <!-- <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'orange'">
+        Style me with better directive!
+      </p> -->
+      <p appBetterHighlight="pink" defaultColor="yellow">
+        Style me with better directive!
+      </p> <!-- since property has same name (alias) as directive selector Also with property binding, when
+                using string, we can remove the square brackets around property name and then we can also skip
+                the single quotes -->
+
+      <div [ngSwitch]="value">
+        <div *ngSwitchCase="5">value is 5</div>
+        <div *ngSwitchCase="2">value is 2</div>
+        <div *ngSwitchCase="10">value is 10</div>
+        <div *ngSwitchDefault>Default</div>
+      </div>
+
+    </div>
+  </div>
+</div>
