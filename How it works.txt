@@ -1,0 +1,36 @@
+A component always has a template (app.component.html or html code), possibly has some styling and importantly a TypeScript file
+
+install nodejs
+
+npm install -g @angular/cli -- installing angular cli
+ng new my-dream-app -- creating new project
+cd my-dream-app -- going to created project's directory
+ng serve -- starting development server to start app
+
+ng serve --port <portNumber>
+
+"saves in node modules"
+-- to install bootstrap
+npm install --save bootstrap@3 -- something like this
+npm install --save bootstrap@3 -- confirmed
+
+*How and Angular app gets loaded and started*
+
+At first, the index.html is executed and the scripts in index.html are injected by angular cli automatically - these scripts will contain our own code too
+then, the first code that gets executed is main.ts
+In main.ts, this line platformBrowserDynamic().bootstrapModule(AppModule)
+In this line, bootstrap starts our angular application by passing AppModule to this method
+and AppModule refers to the file app.module.ts in app folder
+In app.module.ts, we have bootstrap array which lists all the components which should be knownn to angular at the point of time it analyzes our index.html file
+Here the circle closes; as angular now knowns the app.component.* files app folder. Angular reads our setup and now angular knows this selector app-root and now angular is able to handle the app-root in index.html
+
+
+App component is also called the root component
+
+databinding is the communication between our type script code and html template
+
+
+-- creating a component from cli
+ng generate component <ComponentName>
+
+ng generate component <ComponentName> --skipTests true (skipping the creation of test file)
